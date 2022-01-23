@@ -1,13 +1,14 @@
 using Xunit;
 
-namespace phase_finder.tests {
+namespace phrase_finder.tests {
 
-public class OptionsTest
+public class OptionsTests
 {
 
     [Theory]
     [InlineData(new object[] { new string[] {"-source",  "folder",  "-phrase", "hello"} })]
     [InlineData(new object[] { new string[] {"-source",  "folder123",  "-phrase", "hello"} })]
+    [InlineData(new object[] { new string[] {"-source",  "/home/username/Documents/file.txt",  "-phrase", "hello"} })]
     [InlineData(new object[] { new string[] {"-source", "file", "-phrase", "hello", "world"} })]
     public void TestIsValidOptions_ReturnTrue(string[] args)
     {

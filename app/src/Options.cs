@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace phase_finder {
+namespace phrase_finder {
 
 public struct CmdOptions 
 {
@@ -17,7 +17,7 @@ public struct CmdOptions
 public static class Options {
     public static bool IsValidOptions(string[] inputs)
     {
-        string pattern = "(-source \\w+ -phrase .+)";
+        string pattern = "(-source (\\w|\\S)+ -phrase .+)";
         string whole = String.Join(' ', inputs);
         return Regex.IsMatch(whole, pattern);
     }
