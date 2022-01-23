@@ -7,6 +7,7 @@ public class OptionsTest
 
     [Theory]
     [InlineData(new object[] { new string[] {"-source",  "folder",  "-phrase", "hello"} })]
+    [InlineData(new object[] { new string[] {"-source",  "folder123",  "-phrase", "hello"} })]
     [InlineData(new object[] { new string[] {"-source", "file", "-phrase", "hello", "world"} })]
     public void TestIsValidOptions_ReturnTrue(string[] args)
     {
@@ -14,6 +15,8 @@ public class OptionsTest
     }
 
     [Theory]
+    [InlineData(new object[] { new string[] {"-source",  "folder 123",  "-phrase", "hello"} })]
+    [InlineData(new object[] { new string[] {"-source",  "fo lder 123",  "-phrase", "hello"} })]
     [InlineData(new object[] { new string[] {"-source",  "",  "-phrase", "hello"} })]
     [InlineData(new object[] { new string[] {"-source", "file", "-phrase", ""} })]
     [InlineData(new object[] { new string[] {"", "file", "-phrase", "world"} })]
@@ -27,6 +30,22 @@ public class OptionsTest
         Assert.False(Options.IsValidOptions(args));
     }
 
+    [Fact]
+    public void TestParse()
+    {
+        {
+            CmdOptions result = Options.Parse(new string[] {"-source",  "folder",  "-phrase", "hello", "world", "phrase"});
+            Assert.Equal(new CmdOptions("folder", "hello world phrase"), result);
+        }
+        {
+            CmdOptions result = Options.Parse(new string[] {"-source",  "folder",  "-phrase", "hello", "world", "phrase"});
+            Assert.NotEqual(new CmdOptions("folder", "hello"), result);
+        }
+        {
+            CmdOptions result = Options.Parse(new string[] {"-source",  "folder",  "-phrase", "hello", "world", "phrase"});
+            Assert.NotEqual(new CmdOptions("folder", "helloworldphrase"), result);
+        }
+    }
 
 }
 

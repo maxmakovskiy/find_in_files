@@ -6,6 +6,12 @@ public struct CmdOptions
 {
     public string phrase;
     public string source;
+
+    public CmdOptions(string phrase, string source)
+    {
+        this.phrase = phrase;
+        this.source = source;
+    }
 }
 
 public static class Options {
@@ -19,6 +25,8 @@ public static class Options {
     public static CmdOptions Parse(string[] inputs)
     {
         CmdOptions options = new CmdOptions();
+        options.phrase = inputs[1];
+        options.source = String.Join(' ', inputs.Skip(3).ToArray());
 
         return options;
     }
