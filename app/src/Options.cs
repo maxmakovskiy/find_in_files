@@ -7,10 +7,10 @@ public struct CmdOptions
     public string phrase;
     public string source;
 
-    public CmdOptions(string phrase, string source)
+    public CmdOptions(string source, string phrase)
     {
-        this.phrase = phrase;
         this.source = source;
+        this.phrase = phrase;
     }
 }
 
@@ -25,8 +25,8 @@ public static class Options {
     public static CmdOptions Parse(string[] inputs)
     {
         CmdOptions options = new CmdOptions();
-        options.phrase = inputs[1];
-        options.source = String.Join(' ', inputs.Skip(3).ToArray());
+        options.source = inputs[1];
+        options.phrase = String.Join(' ', inputs.Skip(3).ToArray());
 
         return options;
     }
