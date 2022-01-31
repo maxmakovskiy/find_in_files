@@ -4,13 +4,13 @@ namespace phrase_finder {
 
 public struct CmdOptions 
 {
-    public string phrase;
-    public string source;
+    public string Phrase;
+    public string Source;
 
     public CmdOptions(string source, string phrase)
     {
-        this.source = source;
-        this.phrase = phrase;
+        Source = source;
+        Phrase = phrase;
     }
 }
 
@@ -25,12 +25,12 @@ public static class Options {
     public static CmdOptions Parse(string[] inputs)
     {
         CmdOptions options = new CmdOptions();
-        options.source = inputs[1];
-        options.phrase = String.Join(' ', inputs.Skip(3).ToArray());
+        options.Source = inputs[1];
+        options.Phrase = String.Join(' ', inputs.Skip(3).ToArray());
 
         return options;
     }
-
+    
 }
 
 }

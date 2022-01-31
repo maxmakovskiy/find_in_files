@@ -2,15 +2,11 @@ using System.Text.RegularExpressions;
 
 namespace phrase_finder {
 
-public enum FinderStatus {
-    FOUND, NOT_FOUND
-}
-
 public struct LineInfo 
 {
-    public int lineNumber;
-    public string wholeLine;
-    public string fileName;
+    public int LineNumber;
+    public string WholeLine;
+    public string Filename;
 }
 
 public class PhraseFinder
@@ -32,23 +28,24 @@ public class PhraseFinder
         return Regex.IsMatch(source, pattern);
     }
 
-    public Tuple<LineInfo, FinderStatus> Search()
+    public LineInfo[] Search()
     {
-        LineInfo info = new LineInfo();
-        FinderStatus status = FinderStatus.NOT_FOUND;
+        var infos = new List<LineInfo>();
 
         for (int i = 0; i < content.Length; ++i)
         {
             if (FindSubstring(content[i])) 
             {
-                info.lineNumber = i+1;
-                info.wholeLine = content[i];
-                info.fileName = fileName;
-                status = FinderStatus.FOUND;
+                var info = new LineInfo {
+                    LineNumber = i+1,
+                    WholeLine = content[i],
+                    Filename = fileName
+                };
+                infos.Add(info);
             }
         }
 
-        return Tuple.Create(info, status);
+        return infos.ToArray();
     }
 
 }

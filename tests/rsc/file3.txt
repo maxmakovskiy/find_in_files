@@ -27,7 +27,7 @@ System maintenance
 Arch is a rolling release system and has rapid package turnover,
 so users have to take some time to do system maintenance. 
 
-Dublicate section that will be use to track multiple occurences of target phrase in same phrase 
+Duplicate section that will be use to track multiple occurrences of target phrase in same phrase 
 Users and groups
 A new installation leaves you with only the superuser account,
 better known as "root". Logging in as root for prolonged periods of time,

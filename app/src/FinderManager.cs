@@ -3,25 +3,27 @@ namespace phrase_finder {
 
 public class FinderManager
 {
-    private PhraseFinder phraseFinder;
-    private string phrase;
+    private readonly PhraseFinder _phraseFinder;
+    private readonly string _phrase;
 
     public FinderManager(CmdOptions options)
     {
-        phrase = options.phrase;  
-        phraseFinder = new PhraseFinder(options.source, options.phrase);
+        _phrase = options.Phrase;  
+        _phraseFinder = new PhraseFinder(options.Source, options.Phrase);
     }
 
     public string GetResult()
     {
-        var resultOfFind = phraseFinder.Search();
-        if (resultOfFind.Item2 == FinderStatus.NOT_FOUND) {
-            return "not found in " + resultOfFind.Item1.fileName;
+        var resultOfFind = _phraseFinder.Search();
+        if (resultOfFind.Length == 0) {
+            return "not found";
         }
 
-        string result = String.Format("Phare {0} was found in:\n- file\"{1}\" at string {2}: {3}", 
-            phrase, resultOfFind.Item1.fileName, resultOfFind.Item1.lineNumber, resultOfFind.Item1.wholeLine);
-
+        string result = "";
+        foreach (var info in resultOfFind) {
+            result +=
+                $"Phrase {_phrase} was found in:\n- file\"{info.Filename}\" at string #{info.LineNumber}: '{info.WholeLine}'\n";
+        }
         return result;
     }
 

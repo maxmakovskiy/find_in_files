@@ -13,19 +13,30 @@ public class PathFinderTests
     [Fact]
     public void TestSearchFoundOfSingleOccurrences()
     {
-        string fileName = GetRootPath() + "/rsc/file1.txt";
+        string source = GetRootPath() + "/rsc/file1.txt";
         string phrase = "users and services access";
-        var finder = new PhraseFinder(fileName, phrase);
+        var finder = new PhraseFinder(source, phrase);
         var result = finder.Search();
         
-        LineInfo info = new LineInfo();
-        info.fileName = fileName;
-        info.wholeLine = "or deny users and services access to system resources.";
-        info.lineNumber = 16;
+        var info = new LineInfo();
+        info.Filename = source;
+        info.WholeLine = "or deny users and services access to system resources.";
+        info.LineNumber = 16;
 
-        Assert.Equal(System.Tuple.Create(info, FinderStatus.FOUND), result);
+        Assert.Single(result);
+        Assert.Equal(new LineInfo[] {info}, result);
     }
-
+    
+/*
+    [Fact]
+    public void TestFoundMultiOccurrencesSingleFile()
+    {
+        string source = GetRootPath() + "/rsc/file3.txt";
+        string phrase = "it via SSH on a server";
+        var finder = new PhraseFinder(source, phrase);
+        var result = finder.Search();
+    }
+    */
 
     [Fact]
     public void TestSearchNotFound()
@@ -37,7 +48,7 @@ public class PathFinderTests
         
         LineInfo info = new LineInfo();
 
-        Assert.Equal(System.Tuple.Create(info, FinderStatus.NOT_FOUND), result);
+        Assert.Empty(result);
     }
 
     [Fact]
@@ -50,7 +61,7 @@ public class PathFinderTests
         
         LineInfo info = new LineInfo();
 
-        Assert.Equal(System.Tuple.Create(info, FinderStatus.NOT_FOUND), result);
+        Assert.Empty(result);
     }
 
 }
