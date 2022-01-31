@@ -1,13 +1,19 @@
+using System.IO;
 using Xunit;
 
 namespace phrase_finder.tests {
 
 public class PathFinderTests
 {
+    private static string GetRootPath()
+    {
+        return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+    }
+
     [Fact]
     public void TestSearchFoundOfSingleOccurrences()
     {
-        string fileName = "/home/xemerius/devs/find_in_files/tests/rsc/file1.txt";
+        string fileName = GetRootPath() + "/rsc/file1.txt";
         string phrase = "users and services access";
         var finder = new PhraseFinder(fileName, phrase);
         var result = finder.Search();
@@ -20,10 +26,11 @@ public class PathFinderTests
         Assert.Equal(System.Tuple.Create(info, FinderStatus.FOUND), result);
     }
 
+
     [Fact]
     public void TestSearchNotFound()
     {
-        string fileName = "/home/xemerius/devs/find_in_files/tests/rsc/file1.txt";
+        string fileName = GetRootPath() + "/rsc/file1.txt";
         string phrase = "this is a sample string";
         var finder = new PhraseFinder(fileName, phrase);
         var result = finder.Search();
@@ -36,7 +43,7 @@ public class PathFinderTests
     [Fact]
     public void TestSearchInEmptyFile()
     {
-        string fileName = "/home/xemerius/devs/find_in_files/tests/rsc/file2.txt";
+        string fileName = GetRootPath() + "/rsc/file2.txt";
         string phrase = "target string";
         var finder = new PhraseFinder(fileName, phrase);
         var result = finder.Search();
