@@ -11,25 +11,48 @@ public struct LineInfo
 
 public class PhraseFinder
 {
-    private string[] content;
-    private string fileName;
-    private string targetPhrase;
+    private readonly string[] _filenames;
+    private readonly string _targetPhrase;
 
-    public PhraseFinder(string fileName, string targetPhrase)
+    public PhraseFinder(string source, string targetPhrase)
     {
-        this.fileName = fileName;
-        this.targetPhrase = targetPhrase;
-        content = File.ReadAllLines(fileName);
+        var tempFilenames = new List<string>();
+        if (File.Exists(source)) {
+            tempFilenames.Add(source);
+        } else {
+            foreach (var filename in Directory.GetFiles(source))
+            {
+                tempFilenames.Add(filename);
+            }
+        }
+        
+        _filenames = tempFilenames.ToArray();
+        _targetPhrase = targetPhrase;
     }
 
     private bool FindSubstring(string source)
     {
-        string pattern = ".*(" + targetPhrase + ").*";
+        string pattern = ".*(" + _targetPhrase + ").*";
         return Regex.IsMatch(source, pattern);
     }
 
     public LineInfo[] Search()
     {
+        var result = new List<LineInfo>();
+        foreach (var file in _filenames)
+        {
+            foreach (var res in SearchInSingleFile(file))
+            {
+                result.Add(res);    
+            }
+        }
+
+        return result.ToArray();
+    }
+    
+    private LineInfo[] SearchInSingleFile(string filename)
+    {
+        string[] content = File.ReadAllLines(filename);
         var infos = new List<LineInfo>();
 
         for (int i = 0; i < content.Length; ++i)
@@ -39,7 +62,7 @@ public class PhraseFinder
                 var info = new LineInfo {
                     LineNumber = i+1,
                     WholeLine = content[i],
-                    Filename = fileName
+                    Filename = filename
                 };
                 infos.Add(info);
             }
@@ -47,7 +70,7 @@ public class PhraseFinder
 
         return infos.ToArray();
     }
-
+ 
 }
 
 

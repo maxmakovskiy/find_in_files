@@ -1,0 +1,17 @@
+Arch Linux Code of Conduct
+
+The Arch community is a technical community whose shared purpose is to support and enhance Arch Linux.
+Arch Linux is a community-driven distribution; the developers, support staff and people 
+who provide assistance in the various fora all do so in their own time, motivated by a shared desire
+to provide a minimal base system that can be configured by an individual to suit their specific requirements.
+The code of conduct here has been developed over a number of years and reflects the community’s ethos
+of a functional support system with a high signal-to-noise ratio and an explicit expectation of self-sufficiency,
+willingness to learn and contribution.
+Familiarising yourself with the principles and guidelines here is both a courtesy to the community 
+and an effective way of making your initial interactions with other Arch Linux users mutually beneficial.
+
+The rules laid out in this document are necessary limitations to create a community that is useful
+and welcoming to everybody. They allow members to satisfy all contributive impulses without aggravating 
+themselves or encroaching on the freedom of others. Embracing these principles and obeying 
+the guidelines therefore benefits the entire community by providing freedom from the disorder
+and other oppressive, harmful and negative consequences of a more chaotic approach.
