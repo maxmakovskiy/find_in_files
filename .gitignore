@@ -422,5 +422,6 @@ obj/
 .history
 .ionide
 
-# Support for Project snippet scope
+.idea/
+.vscode/
 
