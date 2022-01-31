@@ -5,7 +5,7 @@ namespace phrase_finder.tests {
 public class PathFinderTests
 {
     [Fact]
-    public void TestSearchFound()
+    public void TestSearchFoundOfSingleOccurrences()
     {
         string fileName = "/home/xemerius/devs/find_in_files/tests/rsc/file1.txt";
         string phrase = "users and services access";
