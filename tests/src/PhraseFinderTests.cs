@@ -27,16 +27,30 @@ public class PathFinderTests
         Assert.Equal(new LineInfo[] {info}, result);
     }
     
-/*
     [Fact]
     public void TestFoundMultiOccurrencesSingleFile()
     {
         string source = GetRootPath() + "/rsc/file3.txt";
-        string phrase = "it via SSH on a server";
+        string phrase = "access";
         var finder = new PhraseFinder(source, phrase);
         var result = finder.Search();
+
+        var expected = new LineInfo[] {
+            new LineInfo() {
+                LineNumber = 14,
+                WholeLine = "Users and groups are a mechanism for access control;",
+                Filename = source,
+            },
+            new LineInfo() {
+                LineNumber = 16,
+                WholeLine = "or deny users and services access to system resources.",
+                Filename = source
+            },
+        };
+        
+         Assert.Equal(result.Length, expected.Length);
+         Assert.Equal(expected, result);       
     }
-    */
 
     [Fact]
     public void TestSearchNotFound()

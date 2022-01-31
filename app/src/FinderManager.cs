@@ -19,10 +19,10 @@ public class FinderManager
             return "not found";
         }
 
-        string result = "";
+        string result = $"Phrase '{_phrase}' was found in:\n";
         foreach (var info in resultOfFind) {
             result +=
-                $"Phrase {_phrase} was found in:\n- file\"{info.Filename}\" at string #{info.LineNumber}: '{info.WholeLine}'\n";
+                $"- file'{info.Filename}' at string #{info.LineNumber}: '{info.WholeLine}'\n";
         }
         return result;
     }
